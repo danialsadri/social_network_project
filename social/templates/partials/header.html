@@ -1,0 +1,43 @@
+{% load static %}
+<header class="tr-header">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-left col-md-5">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <div class="search-dashboard">
+                            <form action="{% url 'social:post_search' %}" method="get" novalidate>
+                                <input type="text" name="query" placeholder="جستجو کنید...">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-header col-md-5">
+                <div class="dropdown mega-avatar">
+                    <a style="text-decoration: none" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                        {% if request.user.photo %}
+                            <span class="avatar w-32">
+                                <img src="{{ request.user.photo.url }}" class="img-resonsive img-circle" width="25" height="25" alt="...">
+                            </span>
+                        {% else %}
+                            <span class="avatar w-32">
+                                <img src="{% static 'images/profile/Avatar.png' %}" class="img-resonsive img-circle" width="25" height="25" alt="...">
+                            </span>
+                        {% endif %}
+                    </a>
+                    <div class="dropdown-menu w dropdown-menu-scale pull-right">
+                        <a class="dropdown-item" href="{% url 'social:post_create' %}"><span>پست جدید</span></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'social:profile' %}"><span>پروفایل</span></a>
+                        <a class="dropdown-item" href="{% url 'social:user_edit' %}"><span>تنظیمات</span></a>
+                        <a class="dropdown-item" href="{% url 'social:ticket' %}">پشتیبانی</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'social:logout' %}">خروج</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

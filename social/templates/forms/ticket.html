@@ -1,0 +1,36 @@
+{% extends 'parent/base.html' %}
+{% block title %}ticket form{% endblock %}
+{% load static %}
+
+{% block content %}
+    <section class="login">
+        <div class="container">
+            <div class="banner-content">
+                <form method="post" action="" class="form-signin col-md-6">
+                    <div class="form-group">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {{ field.errors }}<br>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" value="ارسال پیام به پشتیبانی" class="kafe-btn kafe-btn-mint btn-block">
+                </form>
+            </div>
+        </div>
+    </section>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/base.js' %}"></script>
+    <script src="{% static 'plugins/slimscroll/jquery.slimscroll.js' %}"></script>
+    <script>
+        $('#Slim,#Slim2').slimScroll({
+            height: "auto",
+            position: 'right',
+            railVisible: true,
+            alwaysVisible: true,
+            size: "8px",
+        });
+    </script>
+{% endblock %}

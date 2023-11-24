@@ -1,0 +1,69 @@
+{% load static %}
+<div id="myModal-{{ post_id }}" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8 modal-image">
+                        <img class="img-responsive" src="{{ my_post.images.first.image_file.url }}" alt="Image"/>
+                        <br>
+                        <div class="text-center"><p class="text-dark">{{ my_post.description }}</p></div>
+                        <br>
+                        <div class="text-center">
+                            {% for tag in my_post.tags.all %}
+                                <a class="text-dark" href="{% url 'social:post_list_by_tag' tag.slug %}">
+                                    <button> {{ tag.name }}</button>
+                                </a>
+                                {% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <br>
+                    <!--/ col-md-8 -->
+                    <div class="col-md-4 modal-meta">
+                        <div class="modal-meta-top">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <span aria-hidden="true">×</span><span class="sr-only">بستن</span>
+                            </button>
+                            <div class="img-poster clearfix">
+                                <a href="#"><img class="img-responsive img-circle" src="{{ user.photo.url }}"
+                                                 alt="Image"/></a>
+                                <strong><a href="#">{{ user.get_full_name }}</a></strong>
+                            </div>
+                            <ul class="img-comment-list">
+                                {% for comment in my_post.comments.all %}
+                                    <li>
+                                        <div class="comment-img">
+                                            <img src="{% static 'images/profile/avatar2.png' %}" class="img-responsive img-circle" alt="Image"/>
+                                        </div>
+                                        <div class="comment-text">
+                                            <strong><a href="#">{{ comment.name }}</a></strong>
+                                            <p class="">{{ comment.body }}</p> <span class="date sub-text"> در {{ comment.created }} </span>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <div class="modal-meta-bottom">
+                                <ul>
+                                    <li><a class="modal-like" href="#"><i class="fa fa-heart"></i></a><span class="modal-one"> {{ my_post.total_likes }}</span> |
+                                        <a class="modal-comment" href="#"><i class="fa fa-comments"></i></a><span>{{ my_post.comments.count }}</span>
+                                    </li>
+                                    <li>
+										<span class="thumb-xs"><img class="img-responsive img-circle" src="{% static 'images/profile/avatar2.webp' %}" alt="Image"></span>
+                                        <div class="comment-body">
+                                            <form method="post" action="{% url 'social:post_comment' my_post.id %}">
+                                                {% csrf_token %}
+                                                {{ form.as_div }}
+                                                <div class="col-12"><button type="submit" class="btn btn-dark">ثبت</button></div>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

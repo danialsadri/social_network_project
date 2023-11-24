@@ -1,0 +1,18 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}logout form{% endblock %}
+
+
+{% block content %}
+    <div class="centered mb-4 text-center">
+        <br><br>
+        <h2 class="h1 m-0">آیا مطمعن هستید که میخواهید خارج شوید؟</h2>
+        <br><br>
+        <a href="{% url 'social:profile' %}" class="btn btn-dark mb-0">برگشت به صفحه پروفایل</a>
+        <br><br>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-dark mb-0" value="خروج">
+        </form>
+    </div>
+{% endblock %}
