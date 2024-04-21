@@ -1,6 +1,5 @@
 from django import forms
 from .models import User, Post, Comment
-from django.contrib.auth.forms import AuthenticationForm
 
 
 class LoginForm(forms.Form):
